@@ -1,0 +1,31 @@
+Effect.new("<%= effect.name %>", <%= effect.number %>) do
+  <% effect.attributes.sort {|a,b| b.name <=> a.name }.each do |prop| %>
+  def <%= prop.name %> 
+    "<%= prop.value %>"
+  end<% end %>
+
+  <% effect.duration.to_a.slice(0...1).each do |duration| %>
+  def duration 
+    <%= duration.text %>
+  end<% end %>
+
+  <% unless effect.start_messages.empty? %>
+  def start_messages
+   Regexp.union(<% effect.start_messages.each do |msg| %>
+      %r{<%= msg %>},
+    <% end %>)
+  end<% end %>
+  
+  <% unless effect.end_messages.empty? %>
+  def end_messages
+    Regexp.union(<% effect.end_messages.each do |msg| %>
+      %r{<%= msg %>},
+    <% end %>)
+  end<% end %>
+
+  <% effect.costs.each do |cost| %>
+  def <%= cost.attribute("type").value.gsub("-", "_") %>_cost
+    <%= cost.text %>
+  end
+  <% end %>
+end

@@ -1,0 +1,11 @@
+Effect.new("Stun Cloud", 1704) do
+  def type
+    "attack"
+  end
+  def availability
+    "all"
+  end
+  def mana_cost
+    4
+  end
+end
