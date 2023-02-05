@@ -71,8 +71,8 @@ module Effects
         :environment
       when 19
         :whale
-      when 94
-        :cman
+      when 94, 95, 96
+        :psm
       else
         :unknown
       end
